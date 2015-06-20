@@ -137,15 +137,6 @@ func SamplePrint(msg string) {
 }
 _EOF_
 
-$ gtags -v --gtagslabel=pygments
-[Sat Jun 20 07:15:27 UTC 2015] Gtags started.
- Using plug-in parser.
-[Sat Jun 20 07:15:27 UTC 2015] Creating 'GTAGS' and 'GRTAGS'.
- [1] extracting tags of sample-print.go
- [2] extracting tags of sample-main.go
-[Sat Jun 20 07:15:27 UTC 2015] Done.
-$ ls G*
-GPATH  GRTAGS  GTAGS
 $ go build
 $ ./go-sample
 go-sample test 1
