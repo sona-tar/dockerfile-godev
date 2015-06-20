@@ -1,0 +1,73 @@
+###
+# Prompt
+#
+setopt prompt_subst
+PROMPT="[%n %1~]%(!.#.$) "
+
+
+# dir_colors
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dir_colors && eval "$(dircolors -b ~/.dir_colors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+
+## GIT RPROMPT
+# http://qiita.com/hadashiA/items/7180eb6c788233280502
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+
+# 下のformatsの値をそれぞれの変数に入れてくれる機能の、変数の数の最大。
+# デフォルトだと2くらいなので、指定しておかないと、下のformatsがほぼ動かない。
+zstyle ':vcs_info:*' max-exports 7
+
+# 左から順番に、vcs_info_msg_{n}_ という名前の変数に格納されるので、下で利用する
+zstyle ':vcs_info:*' formats '%R' '%S' '%b' '%s'
+# 状態が特殊な場合のformats
+zstyle ':vcs_info:*' actionformats '%R' '%S' '%b|%a' '%s'
+
+# 4.3.10以上の場合は、check-for-changesという機能を使う。
+autoload -Uz is-at-least
+if is-at-least 4.3.10; then
+    zstyle ':vcs_info:*' check-for-changes true
+    zstyle ':vcs_info:*' formats '%R' '%S' '%b' '%s' '%c' '%u'
+    zstyle ':vcs_info:*' actionformats '%R' '%S' '%b|%a' '%s' '%c' '%u'
+fi
+
+function echo_rprompt () {
+    local repos branch st color right_prompt
+    local r_path
+    psvar=()
+
+    LANG=en_US.UTF-8 vcs_info
+
+    if [[ -n "$vcs_info_msg_1_" ]] ; then
+        # relative path from repos top dir
+	# r_path="%F{magenta}$vcs_info_msg_1_%f"
+
+	# repository path
+	repos="%F{blue}$(print -nD $vcs_info_msg_0_)%f"
+
+	# branch
+	color="{green}"                                                      # ok
+	[[ -n "$vcs_info_msg_4_" ]] && color="{yellow}"                      # no commit
+	[[ -n "$vcs_info_msg_5_" ]] && color="{red}"                         # unstaged
+	[[ -n "$vcs_info_msg_2_" ]] && branch="%F${color}$vcs_info_msg_2_%f"
+
+	# right_prompt
+	# echo "[%35<..<${r_path}%<<][%35<..<${repos}@${branch}%<<]"
+	echo "[%35<..<${repos}@${branch}%<<]"
+    else
+	# right_prompt
+	echo "[%F{blue}%100<..<%~%<<%f]"
+    fi
+}
+
+setopt prompt_subst
+RPROMPT='`echo_rprompt`'
+
+setopt no_prompt_cr
+PS1="%{${(pl:COLUMNS+1:: ::\r:)}%}$PS1"

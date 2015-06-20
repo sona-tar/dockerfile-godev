@@ -1,0 +1,8 @@
+[core]
+	excludesfile = ~/.gitignore
+[color]
+	ui = auto
+[url "https://"]
+    insteadOf = git://
+[ghq]
+    root="~/src"

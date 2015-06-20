@@ -1,0 +1,34 @@
+################################################################################
+# FUNC
+#
+function git-hash-peco() {
+  BASE_CMD="git log --oneline --decorate --graph --branches"
+  ${BASE_CMD} | peco | awk '{print $2}'
+}
+
+function git-status-files-peco() {
+  BASE_CMD="git status --short"
+  ${BASE_CMD} | peco | awk '{print $2}'
+}
+
+function gpr () {
+  ghq list --full-path | peco | xargs rm -r
+}
+
+function gpi () {
+  [ "$#" -eq 0 ] && echo "Usage : gpi QUERY" && return 1
+  ghs "$@" | peco | awk '{print $1}' | ghq import
+}
+
+
+################################################################################
+# Global Alias
+#
+alias -g H='$(git-hash-peco)'
+alias -g F='$(git-status-files-peco)'
+
+# Normal Alias
+#
+
+alias glk='ghq look'
+alias gli='ghq list'

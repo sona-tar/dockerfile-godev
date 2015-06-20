@@ -1,0 +1,14 @@
+# /usr/local
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
+export MAN_PATH=${MAN_PATH}
+export INFO_PATH=${INFO_PATH}
+export PATH=${PATH}:/usr/local/bin
+
+# golang
+export GOPATH=$HOME
+export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
+
+# brew
+export BREWHOME=${HOME}/.linuxbrew
+export LD_LIBRARY_PATH=${BREWHOME}/lib64:${BREWHOME}/lib:${LD_LIBRARY_PATH}
+export PATH=${BREWHOME}/bin:${PATH}

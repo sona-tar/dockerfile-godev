@@ -1,0 +1,6 @@
+dev:
+    image: sonatar/devtools-dockerfile
+    ports:
+     - "10022:22"
+    volumes:
+     - /:/host

@@ -1,0 +1,6 @@
+dev:
+    build: .
+    ports:
+     - "10022:22"
+    volumes:
+     - /:/host
