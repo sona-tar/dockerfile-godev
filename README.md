@@ -22,6 +22,7 @@ Golang Development Tools on Ubuntu.
 
 ### Github
 
+* [hub](https://github.com/github/hub) - Command-line wrapper for git that makes you better at GitHub.
 * [ghq](https://github.com/motemen/ghq) -  Manage remote repository clones
 * [ghr](https://github.com/tcnksm/ghr) - Easily ship your project to your user using Github Releases.
 * [ghs](https://github.com/sona-tar/ghs) -  search repository in github
