@@ -150,7 +150,7 @@ go-sample test 2
 $ git add sample-main.go sample-print.go
 $ git commit -m "Add sample-main.go sample-print.go"
 $ git tag -a 0.0.1 -m "Release 0.0.1"
-$ git push --tag
+$ git push --tag origin master
 ```
 
 ### Release binary
@@ -169,4 +169,45 @@ $ release_pkg.sh 0.0.1
 $ hub release
  (0.0.1)
 $ hub browse
+```
+
+Create homebrew fomula
+
+```
+$ mkdir ~/src/github.com/${GITHUB_UWER}/homebrew-tools
+$ cd ~/src/github.com/${GITHUB_UWER}/homebrew-tools
+$ git init
+$ hub create
+cat << '_EOF_' > go-sample.rb
+require "language/go"
+
+USER="YOU"
+
+class GoSample < Formula
+  url  "https://github.com/#{USER}/go-sample", :using => :git, :tag => "0.0.1"
+  head "https://github.com/#{USER}/go-sample", :using => :git, :branch => "master"
+
+  depends_on "go" => :build
+  depends_on :hg => :build
+
+  # If you have dependency package
+  # go_resource "github.com/google/go-querystring" do
+  #   url "https://github.com/google/go-querystring.git", :branch => "master"
+  # end
+
+  def install
+    ENV["GOPATH"] = buildpath
+    mkdir_p buildpath/"src/github.com/#{USER}/go-sample"
+    ln_sf buildpath, buildpath/"src/github.com/#{USER}/go-sample"
+    Language::Go.stage_deps resources, buildpath/"src"
+
+    # Build and install
+    system "go", "build", "-o", "go-sample"
+    bin.install "go-sample"
+  end
+end
+_EOF_
+$ git add go-sample.rb
+$ git commit -m "First commit"
+$ git push origin master
 ```
