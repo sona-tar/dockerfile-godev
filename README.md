@@ -178,10 +178,13 @@ $ mkdir ~/src/github.com/${GITHUB_UWER}/homebrew-tools
 $ cd ~/src/github.com/${GITHUB_UWER}/homebrew-tools
 $ git init
 $ hub create
-cat << '_EOF_' > go-sample.rb
+```
+
+```
+cat << _EOF_ > go-sample.rb
 require "language/go"
 
-USER="YOU"
+USER="${GITHUB_USER}"
 
 class GoSample < Formula
   url  "https://github.com/#{USER}/go-sample", :using => :git, :tag => "0.0.1"
@@ -207,7 +210,18 @@ class GoSample < Formula
   end
 end
 _EOF_
+```
+
+```
 $ git add go-sample.rb
 $ git commit -m "First commit"
 $ git push origin master
+```
+
+Install by homebrew
+
+```
+$ brew install ${GITHUB_USER}/tools/go-sample
+$ which go-sample
+/home/develop/.linuxbrew/bin/go-sample
 ```
