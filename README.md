@@ -92,6 +92,7 @@ devtoolsdockerfile_dev_1   /usr/sbin/sshd -D   Up      0.0.0.0:10022->22/tcp
 ```
 
 ### Git settings
+
 ```
 export GITHUB_USER=YOU
 $ git config --global user.name    ${GITHUB_USER}
@@ -159,7 +160,7 @@ Build for Multi platoforms by gox.
 
 
 ```
-$ create_pkg.sh 0.0.1
+$ goxa 0.0.1
 ```
 
 Release all binary by ghr.
