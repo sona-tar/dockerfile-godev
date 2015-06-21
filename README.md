@@ -75,6 +75,10 @@ $ git checkout H
 ```
 # git clone https://github.com/sona-tar/devtools-dockerfile.git
 # cd devtools-dockerfile
+```
+
+SSH Login
+```
 # docker-compose up -d
 Pulling dev (sonatar/devtools-dockerfile:latest)...
 Creating devtoolsdockerfile_dev_1...
@@ -83,12 +87,17 @@ Creating devtoolsdockerfile_dev_1...
 Name                  Command        State           Ports
 ----------------------------------------------------------------------------
 devtoolsdockerfile_dev_1   /usr/sbin/sshd -D   Up      0.0.0.0:10022->22/tcp
-```
 
-### Login
-```
 # CONTAINERHOST=localhost
 # ssh -p 10022 develop@${CONTAINERHOST}
+[develop ~]$
+```
+
+or docker run zsh
+```
+$ docker-compose run -u develop dev /usr/bin/zsh
+[develop /]$ cd
+[develop ~]$
 ```
 
 ### Git settings

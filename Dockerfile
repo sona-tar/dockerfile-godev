@@ -67,7 +67,6 @@ RUN mkdir -p ${HOME}/src/github.com \
     cp ${HOME}/.linuxbrew/share/gtags/gtags.vim ${HOME}/.vim/plugin/ && \
     cp ${HOME}/.linuxbrew/share/gtags/gtags.el ${HOME}/.emacs.d/plugin/
 
-ADD add_dir/proxy.sh ${USER_HOME}/
 ADD add_dir/bin ${USER_HOME}/bin/
 ADD add_dir/.tmux.conf ${USER_HOME}/
 ADD add_dir/.gitconfig ${USER_HOME}/
