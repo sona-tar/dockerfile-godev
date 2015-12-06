@@ -33,6 +33,7 @@ Golang Development Tools on Ubuntu.
 * [peco](https://github.com/peco/peco) - Simplistic interactive filtering tool
 * [GNU Global and pygments](http://qiita.com/sona-tar/items/672df1259a76f082ce42) - Source code tagging system. Support Golang, Ruby, Python, C/C++ and more.
 * [gorename](http://mattn.kaoriya.net/software/lang/go/20150113141338.htm) Type-safe renaming of identifiers.
+* [golint](https://github.com/golang/lint) Golint is a linter for Go source code.
 
 
 ### Alias

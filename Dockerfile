@@ -56,7 +56,8 @@ RUN ${USER_HOME}/.linuxbrew/bin/brew doctor && \
 ENV GOPATH "${USER_HOME}"
 ENV PATH   "${GOPATH}/bin:${PATH}"
 RUN go get github.com/mitchellh/gox && \
-    go get golang.org/x/tools/cmd/gorename
+    go get golang.org/x/tools/cmd/gorename &&
+    go get github.com/golang/lint
 RUN GOMAXPROCS=4 gox -build-toolchain
 RUN mkdir -p ${HOME}/src/github.com \
              ${HOME}/bin \
